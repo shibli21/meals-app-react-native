@@ -1,11 +1,13 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import {
   NavigationParams,
   NavigationScreenProp,
   NavigationState,
 } from "react-navigation";
-import { CATEGORIES } from "../data/dummy-data";
+import MealItem from "../components/MealItem";
+import { CATEGORIES, MEALS } from "../data/dummy-data";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
@@ -14,16 +16,39 @@ interface Props {
 type Navigation = NavigationScreenProp<NavigationState, NavigationParams>;
 
 const CategoryMealsScreen = (props: Props) => {
-  return (
-    <View style={styles.screen}>
-      <Text>Category MealScreen </Text>
-      <Button
-        title="go to meal detail"
-        onPress={() => {
+  const catId = props.navigation.getParam("categoryId");
+
+  const displayMeals = MEALS.filter(
+    (meal) => meal.categoryIds.indexOf(catId) >= 0
+  );
+
+  const renderItem = ({ item }: any) => {
+    return (
+      <MealItem
+        affordability={item.affordability}
+        complexity={item.complexity}
+        duration={item.duration}
+        image={item.imageUrl}
+        onSelectMeal={() => {
           props.navigation.navigate({
             routeName: "MealDetail",
+            params: {
+              mealId: item.id,
+            },
           });
         }}
+        title={item.title}
+        key={item.id}
+      />
+    );
+  };
+
+  return (
+    <View style={styles.screen}>
+      <FlatList
+        data={displayMeals}
+        keyExtractor={(item, index) => item.id}
+        renderItem={renderItem}
       />
     </View>
   );
