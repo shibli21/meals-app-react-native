@@ -1,12 +1,19 @@
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
-import { NavigationScreenProp } from "react-navigation";
+import {
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationState,
+} from "react-navigation";
+import { CATEGORIES } from "../data/dummy-data";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
 }
 
-const CategoryMealScreen = (props: Props) => {
+type Navigation = NavigationScreenProp<NavigationState, NavigationParams>;
+
+const CategoryMealsScreen = (props: Props) => {
   return (
     <View style={styles.screen}>
       <Text>Category MealScreen </Text>
@@ -22,7 +29,21 @@ const CategoryMealScreen = (props: Props) => {
   );
 };
 
-export default CategoryMealScreen;
+export default CategoryMealsScreen;
+
+CategoryMealsScreen.navigationOptions = ({
+  navigation,
+}: {
+  navigation: Navigation;
+}) => {
+  const catId = navigation.getParam("categoryId");
+
+  const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
+
+  return {
+    headerTitle: selectedCategory?.title,
+  };
+};
 
 const styles = StyleSheet.create({
   screen: {
