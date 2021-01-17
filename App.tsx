@@ -3,6 +3,7 @@ import * as Font from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import MealsNavigator from "./navigation/MealsNavigator";
 
 const fetchFonts = async () => {
   Font.loadAsync({
@@ -24,19 +25,7 @@ export default function App() {
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <Text
-        style={{
-          color: "white",
-          fontSize: 49,
-        }}
-      >
-        Yooo
-      </Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <MealsNavigator />;
 }
 
 const styles = StyleSheet.create({
