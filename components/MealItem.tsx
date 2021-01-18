@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     borderRadius: 10,
     overflow: "hidden",
+    // margin: 10,
+    padding: 10,
   },
   bgImage: {
     width: "100%",
