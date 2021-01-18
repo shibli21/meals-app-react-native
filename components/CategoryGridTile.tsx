@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     margin: 15,
     height: 150,
     width: (Dimensions.get("window").width - 60) / 2,
-    borderRadius: 10,
+    borderRadius: 3,
+    elevation: 10,
     overflow: "hidden",
   },
   container: {
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowRadius: 10,
-    elevation: 3,
     padding: 10,
     justifyContent: "flex-end",
     alignItems: "flex-end",
