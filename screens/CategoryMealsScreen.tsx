@@ -1,12 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { StyleSheet } from "react-native";
 import {
   NavigationParams,
   NavigationScreenProp,
   NavigationState,
 } from "react-navigation";
-import MealItem from "../components/MealItem";
+import MealList from "../components/MealList";
 import { CATEGORIES, MEALS } from "../data/dummy-data";
 
 interface Props {
@@ -22,36 +21,7 @@ const CategoryMealsScreen = (props: Props) => {
     (meal) => meal.categoryIds.indexOf(catId) >= 0
   );
 
-  const renderItem = ({ item }: any) => {
-    return (
-      <MealItem
-        affordability={item.affordability}
-        complexity={item.complexity}
-        duration={item.duration}
-        image={item.imageUrl}
-        onSelectMeal={() => {
-          props.navigation.navigate({
-            routeName: "MealDetail",
-            params: {
-              mealId: item.id,
-            },
-          });
-        }}
-        title={item.title}
-        key={item.id}
-      />
-    );
-  };
-
-  return (
-    <View style={styles.screen}>
-      <FlatList
-        data={displayMeals}
-        keyExtractor={(item, index) => item.id}
-        renderItem={renderItem}
-      />
-    </View>
-  );
+  return <MealList listData={displayMeals} navigation={props.navigation} />;
 };
 
 export default CategoryMealsScreen;
