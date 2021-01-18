@@ -1,12 +1,24 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { NavigationScreenProp } from "react-navigation";
+import {
+  NavigationComponent,
+  NavigationParams,
+  NavigationRoute,
+  NavigationScreenProp,
+  NavigationState,
+} from "react-navigation";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { NavigationStackOptions } from "react-navigation-stack";
+import {
+  StackNavigationOptions,
+  StackNavigationProp,
+} from "react-navigation-stack/lib/typescript/src/vendor/types";
 import CategoryGridTile from "../components/CategoryGridTile";
+import CustomHeaderButton from "../components/HeaderButton";
 import { CATEGORIES } from "../data/dummy-data";
 
 interface Props {
-  navigation: NavigationScreenProp<any, any>;
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
 const CategoriesScreen = (props: Props) => {
@@ -37,12 +49,19 @@ const CategoriesScreen = (props: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+CategoriesScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerTitle: "Meal Categories",
+    headerLeft: (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Menu"
+          iconName="ios-menu"
+          onPress={() => navigation.toggleDrawer()}
+        />
+      </HeaderButtons>
+    ),
+  };
+};
 
 export default CategoriesScreen;
