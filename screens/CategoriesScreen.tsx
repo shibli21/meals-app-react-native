@@ -1,18 +1,11 @@
 import React from "react";
 import { FlatList } from "react-native-gesture-handler";
 import {
-  NavigationComponent,
   NavigationParams,
-  NavigationRoute,
   NavigationScreenProp,
   NavigationState,
 } from "react-navigation";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { NavigationStackOptions } from "react-navigation-stack";
-import {
-  StackNavigationOptions,
-  StackNavigationProp,
-} from "react-navigation-stack/lib/typescript/src/vendor/types";
 import CategoryGridTile from "../components/CategoryGridTile";
 import CustomHeaderButton from "../components/HeaderButton";
 import { CATEGORIES } from "../data/dummy-data";

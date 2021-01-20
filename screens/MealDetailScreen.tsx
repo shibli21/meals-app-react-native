@@ -7,6 +7,7 @@ import {
   NavigationState,
 } from "react-navigation";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useSelector } from "react-redux";
 import DefaultText from "../components/DefaultText";
 import CustomHeaderButton from "../components/HeaderButton";
 import { MEALS } from "../data/dummy-data";
@@ -27,8 +28,9 @@ const ListItem = (props: any) => {
 
 const MealDetailScreen = (props: Props) => {
   const mealId = props.navigation.getParam("mealId");
+  const availableMeals = useSelector((state) => state.meals.meals);
 
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
 
   return (
     <ScrollView>
