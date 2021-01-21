@@ -1,6 +1,7 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
+import { useSelector } from "react-redux";
 import MealItem from "./MealItem";
 
 interface Props {
@@ -9,7 +10,11 @@ interface Props {
 }
 
 const MealList = (props: Props) => {
+  const favoriteMeals = useSelector((state) => state.meals.favoriteMeals);
+
   const renderMealItem = ({ item }: any) => {
+    const isFav = favoriteMeals.some((meal) => meal.id === item.id);
+
     return (
       <MealItem
         title={item.title}
@@ -23,6 +28,7 @@ const MealList = (props: Props) => {
             params: {
               mealId: item.id,
               mealTitle: item.title,
+              isFav: isFav,
             },
           });
         }}
